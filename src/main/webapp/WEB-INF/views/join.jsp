@@ -10,7 +10,16 @@
 
 	<h2>회원가입</h2>
 	<hr>
+	<h3>get방식 전달</h3>
 	<form action="joinOk" method="get">
+		아이디 : <input type="text" name="mid"><br><br>
+		비밀번호 : <input type="password" name="mpw"><br><br>
+		이름 : <input type="text" name="mname"><br><br>
+		나이 : <input type="text" name="mage"><br><br>
+		<input type="submit" value="회원가입">
+	</form>
+	<h3>post 방식 전달</h3>
+	<form action="joinOk" method="post">
 		아이디 : <input type="text" name="mid"><br><br>
 		비밀번호 : <input type="password" name="mpw"><br><br>
 		이름 : <input type="text" name="mname"><br><br>

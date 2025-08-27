@@ -6,8 +6,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -73,9 +75,11 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping(value="/joinOk")
+	//post방식으로 넘어올때 처리
+	@RequestMapping(value="/joinOk", method = RequestMethod.POST)  // join에서 get방식으로으로넘어오면 에러
 	public String loginOk(MemberDto memberDto, Model model) {   
 		// memberDto 넣으면 밑에 5즐모두 생략가능(넘어 오는 파라미터값과 DTO의 멤버변수 이름이 같아야함)
+	//public String loginOk(@RequestParam("mid") String mid, @RequestParam("mpw") String mpw,@RequestParam("mname") String mname,@RequestParam("mage") String mage)	
 		
 		
 //		String mid = request.getParameter("mid");
@@ -88,6 +92,37 @@ public class MemberController {
 		model.addAttribute("memberDto",memberDto);
 		
 		return "joinOk";
+	}
+	
+	//get방식으로 넘어올때 처리  // 위에랑 똑같은 요청이지만 방식을 다르게해서 - 다른 결과값을 낼 수 있다. / 여러개 결과값을 낼 수 있다.
+	@RequestMapping(value="/joinOk", method = RequestMethod.GET) 
+	public String loginOk2(MemberDto memberDto, Model model) {   
+		// memberDto 넣으면 밑에 5즐모두 생략가능(넘어 오는 파라미터값과 DTO의 멤버변수 이름이 같아야함)
+	//public String loginOk(@RequestParam("mid") String mid, @RequestParam("mpw") String mpw,@RequestParam("mname") String mname,@RequestParam("mage") String mage)	
+		
+		
+//		String mid = request.getParameter("mid");
+//		String mpw = request.getParameter("mpw");
+//		String mname = request.getParameter("mname");
+//		String mage = request.getParameter("mage");
+//		
+//		MemberDto memberDto = new MemberDto(mid, mpw, mname, mage);
+		
+		model.addAttribute("memberDto",memberDto);
+		
+		return "joinOk";
+	}
+	
+	
+	
+  // modelattribute - > 긴이름 줄일수도 있고, 밑에 model.~ 이거 안써줘도 된다.
+	@RequestMapping(value="/student") 
+	public String studentInfo(@ModelAttribute("sInfo") StudentInfomationDto studentInfomationDto, Model model) {   
+
+		
+		// model.addAttribute("Dto",studentInfomationDto);   // 위에서 @ModelAttribute("sInfo")가 대신해준다 - ok.jsp에서 줄여서 쓸 수 있다
+		
+		return "studentOk";
 	}
 	
 	
